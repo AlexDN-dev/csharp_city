@@ -1,6 +1,8 @@
-﻿namespace csharpCity;
+﻿using csharpCity.Entities;
 
-public interface ITaxable
+namespace csharpCity;
+
+public interface ITaxable<TProduct> where TProduct : Product
 {
-    public double CalculateTax();
+    public double CalculateTax(TProduct product);
 }
