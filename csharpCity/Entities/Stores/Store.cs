@@ -1,4 +1,6 @@
-﻿namespace csharpCity.Entities;
+﻿using csharpCity.Utils;
+
+namespace csharpCity.Entities;
 
 public abstract class Store<TProduct> : ITaxable<TProduct> where TProduct : Product
 {
@@ -18,15 +20,14 @@ public abstract class Store<TProduct> : ITaxable<TProduct> where TProduct : Prod
         ProductsList.Add(product);
     }
 
-    public void RemoveProduct(TProduct product)
+    public Result RemoveProduct(TProduct product)
     {
         if (ProductsList.Remove(product))
         {
-            Console.WriteLine($"Le produit {product.Name} à bien été supprimé.");
-            return;
+            return Result.Success();
         }
 
-        Console.WriteLine("Ce produit n'existe pas !");
+        return Result.Failure(Errors.ProductNotFound);
     }
 
     public void ShowProductList()
